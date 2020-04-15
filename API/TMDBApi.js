@@ -1,0 +1,29 @@
+const API_KEY = '778dab49f6addf82a9c4a87816d653e0';
+
+export function getFilmsFromApiWithSearchText(text, page) {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${text}&page=${page}`;
+
+  return fetch(url)
+    .then(response => response.json())
+    .catch(err => console.log(err));
+}
+
+export function getImageFromApi(name) {
+  return 'https://image.tmdb.org/t/p/w300' + name;
+}
+
+export function getFilmDetailFromApi(id) {
+  return fetch(
+    'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + API_KEY,
+  )
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
+
+export function getLatestMoviesFromApi(page) {
+  return fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&vote_count.gte=1000&sort_by=release_date.desc&page=${page}`,
+  )
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
